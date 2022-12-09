@@ -1,27 +1,21 @@
 <template>
   <div class="app-header-nav">
     <ul class="header w">
-      <li>
-        <router-link to="/">首页</router-link>
+      <li class="item">
+            <router-link class="link" to="/">首页</router-link>
+        </li>
+      <li v-for="item in list" :key="item.id">
+        <router-link :to="('/category/'+item.id)">{{item.name}}</router-link>
         <!-- 弹出层 -->
         <div class="layer w">
           <ul>
-            <li><a href="###"> 京 </a></li>
-            <li><a href="###"> 津 </a></li>
-            <li><a href="###"> 蒙 </a></li>
-            <li><a href="###"> 冀 </a></li>
-            <li><a href="###"> 鲁 </a></li>
-            <li><a href="###"> 川 </a></li>
+            <li v-for="ele in list.CateGroupList" :key="ele.id">
+              <router-link :to="('/category/'+ele.id)">{{ele.name}}</router-link>   
+            </li>
+            
           </ul>
         </div>
       </li>
-      <li><a href="###">热榜</a></li>
-      <li><a href="###">地方</a></li>
-      <li><a href="###">陆地</a></li>
-      <li><a href="###">海洋</a></li>
-      <li><a href="###">空气</a></li>
-      <li><a href="###">水</a></li>
-      <li><a href="###">放射</a></li>
       <li>
         <a href="###"><i class="iconfont icon-gengduo"></i></a>
       </li>
@@ -36,7 +30,33 @@
 </template>
 
 <script>
-export default {};
+import { getCategoryList } from '@/api';
+import { ref } from 'vue';
+import { computed } from '@vue/runtime-core';
+import { useStore } from 'vuex';
+export default {
+  setup(props){
+    const list=ref([]);
+    getCategoryList().then(res=>{
+      console.log(res);
+      if(res.code==='200'){
+        list.value=res.data[0].cateList;
+      }
+    }).catch(err=>{
+      console.log(err);
+    })
+    return {list}
+  }
+  // setup(props){
+  //   const store = useStore();
+  //   const list = computed(()=>{
+  //     return store.state.category.cateList
+  //   });
+
+  //   return {list};
+  // }
+
+};
 </script>
 
 <style lang="less" scoped>
@@ -49,31 +69,36 @@ export default {};
   clear: both;
   z-index: 999;
   li { 
-    height: 50px;
+    height: 30px;
     float: left;
-    padding: 10px 32px;
+    padding: 0 32px;
+    margin-top: 10px;
     font-size: 20px;
     font-weight: bold;
     overflow: hidden;
     a {
+      margin-top: 12px;
       color: rgba(244, 244, 244, 0.971);
-      padding-bottom: 0;
-      margin-bottom: 0;
       &:hover{
         color: @xtxColor;
       }
       i {
         font-size: 25px;
-      }    
-    }
-    &:hover {
+      }
+    
+      }
+      &:hover {
         color: @xtxColor;
         .layer{
             opacity: 1;
             height: 50px;
-        }
-       
-      }
+            ul{
+              li{
+                margin-left: 20px;
+              }
+            }
+        }    
+    }
   }
 
   .layer {

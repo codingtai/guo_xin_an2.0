@@ -1,6 +1,6 @@
 <template>
-    <div>
-        分类       
+    <div class="category w">
+        <h3>敬请期待</h3>
     </div>
 </template>
 
@@ -11,5 +11,7 @@
 </script>
 
 <style lang="less" scoped>
-
+.category{
+    height: 1000px;
+}
 </style>
