@@ -4,6 +4,7 @@
     <div class="header-top w">
       <h1 class="logo">
         <router-link to="/">新生态</router-link>
+        <img src="" alt="">
       </h1>
     </div>
     <!-- 下边区域 -->
@@ -29,7 +30,7 @@ export default {
 
 <style lang="less" scoped>
 .my-header {
-  height: 120px;
+  height: 110px;
   background-color: #fff;
 }
 .header-top {
@@ -37,5 +38,6 @@ export default {
 }
 .logo {
   padding: 7px;
+  width: 100px;
 }
 </style>

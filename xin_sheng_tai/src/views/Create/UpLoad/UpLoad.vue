@@ -1,17 +1,17 @@
 <template>
-    <div class="category w">
-        <h3>敬请期待</h3>
+    <div>
+        <my-up-load/>
     </div>
 </template>
 
 <script>
+import MyUpLoad from './MyUpLoad.vue'
     export default {
+  components: { MyUpLoad },
         
     }
 </script>
 
 <style lang="less" scoped>
-.category{
-    height: 1000px;
-}
+
 </style>

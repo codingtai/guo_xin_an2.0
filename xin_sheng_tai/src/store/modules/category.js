@@ -5,7 +5,7 @@ export default{
     namespace:true,
     state:()=>{
         return{
-            cateList:[],//默认值，如果请求不到数据时显示
+            cateList:topCategory,//默认值，如果请求不到数据时显示
         }
     },
     mutations:{

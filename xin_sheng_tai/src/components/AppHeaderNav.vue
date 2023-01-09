@@ -5,25 +5,25 @@
             <router-link class="link" to="/">首页</router-link>
         </li>
       <li v-for="item in list" :key="item.id">
-        <router-link :to="('/category/'+item.id)">{{item.name}}</router-link>
+        <router-link :to="item.router">{{item.name}}</router-link>
         <!-- 弹出层 -->
-        <div class="layer w">
+        <!-- <div class="layer w">
           <ul>
             <li v-for="ele in list.CateGroupList" :key="ele.id">
               <router-link :to="('/category/'+ele.id)">{{ele.name}}</router-link>   
             </li>
             
           </ul>
-        </div>
+        </div> -->
       </li>
       <li>
         <a href="###"><i class="iconfont icon-gengduo"></i></a>
       </li>
       <li>
-        <a href="###"><i class="iconfont icon-sousuo"></i></a>
+        <router-link tag="a" target="_blank" to="/search"><i class="iconfont icon-sousuo"></i></router-link>
       </li>
       <li>
-        <a href="###"><i class="iconfont icon-fabu"></i></a>
+        <router-link tag="a" target="_blank" to="/create"><i class="iconfont icon-fabu"></i></router-link>
       </li>
     </ul>
   </div>
@@ -71,22 +71,13 @@ export default {
   li { 
     height: 30px;
     float: left;
-    padding: 0 32px;
-    margin-top: 10px;
+    margin: 10px 32px;
     font-size: 20px;
     font-weight: bold;
     overflow: hidden;
     a {
       margin-top: 12px;
       color: rgba(244, 244, 244, 0.971);
-      &:hover{
-        color: @xtxColor;
-      }
-      i {
-        font-size: 25px;
-      }
-    
-      }
       &:hover {
         color: @xtxColor;
         .layer{
@@ -99,6 +90,15 @@ export default {
             }
         }    
     }
+      &:hover{
+        color: @xtxColor;
+      }
+      i {
+        font-size: 25px;
+      }
+    
+      }
+      
   }
 
   .layer {

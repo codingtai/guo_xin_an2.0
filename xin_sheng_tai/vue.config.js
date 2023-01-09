@@ -16,7 +16,7 @@ module.exports = defineConfig({
   devServer:{
     proxy:{      
       '/api':{
-        target:'http://www.xlitongx.fun:3000',//本地接口，自己的服务器
+        target:'http://localhost:3000',//本地接口，自己的服务器
         ws:true,
         changeOrigin:true,
         pathRewrite:{//重写路径

@@ -17,7 +17,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="###">个人中心</a>
+                        <router-link to="/personalcenter">个人中心</router-link>
                     </li>
                     <li>
                         <a href="###">客户服务</a>
