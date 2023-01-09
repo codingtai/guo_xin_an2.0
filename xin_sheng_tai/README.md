@@ -1,4 +1,9 @@
 # xin_sheng_tai
+项目前端地址
+https://github.com/codingtai/guo_xin_an2.0.git
+项目后端地址
+https://github.com/codingtai/guo_xin_an2.0_serve.git
+
 
 ## Project setup
 ```
