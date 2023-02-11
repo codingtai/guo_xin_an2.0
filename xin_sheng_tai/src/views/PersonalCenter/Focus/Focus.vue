@@ -1,8 +1,8 @@
 <template>
     <div class="focus w">
         <MyPanel class="panel" title="我的关注" subTitle=""></MyPanel>
-        <my-focus/>
-        <my-focus/>
+        <!-- <my-focus/>
+        <my-focus/> -->
     </div>
 </template>
 

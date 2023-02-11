@@ -16,14 +16,23 @@ module.exports = defineConfig({
   devServer:{
     proxy:{      
       '/api':{
-        target:'http://localhost:3000',//本地接口，自己的服务器
+        target:'http://localhost:3000',//本地接口，自己的服务器,node.js
         ws:true,
         changeOrigin:true,
         pathRewrite:{//重写路径
           '^/api':''
         }
       },
+      '/foo':{
+        target:'http://localhost:3300',//本地接口，自己的服务器,Django
+        ws:true,
+        changeOrigin:true,
+        pathRewrite:{//重写路径
+          '^/foo':''
+        }
+      },
     },
   }
+  
   
 })

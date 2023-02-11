@@ -1,14 +1,17 @@
 <template>
     <div>
-        <app-card/>
+        <app-card :list="list"/>
     </div>
 </template>
 
 <script>
-import AppCard from '../../../components/liarbry/AppCard.vue'
     export default {
-  components: { AppCard },
-        
+        props:{
+            list:{
+                type:Array,
+                default:[]
+            }
+        }
     }
 </script>
 

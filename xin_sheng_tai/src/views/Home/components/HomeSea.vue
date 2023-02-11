@@ -1,110 +1,145 @@
 <template>
-    <div class="sea">
-      <MyPanel title="海洋污染" subTitle="保护海洋保护世界">
-        <!-- 使用右侧插槽 -->
-        <template #right>
-          <app-more/>
-        </template>
-        <div class="severe">
+  <div class="sea">
+    <MyPanel title="海洋污染" subTitle="保护海洋保护世界">
+      <!-- 使用右侧插槽 -->
+      <template #right>
+        <app-more />
+      </template>
+      <div class="severe">
         <!-- 第一排 -->
         <div class="rm_wt01 w">
-        <!-- <ul class="all"> -->
+          <ul class="all">
           <!-- 左侧 -->
-          <!-- <li> -->
-            <div class="col_01_left">
-              <div class="news">
-                <h3>
-                  <a href="">探索宜宾新城环境污染问题</a>
-                </h3>
-              </div>
-              <p class="gray">
-                <a href="">
-                  一部中国陶瓷史，半部在浙江；一部浙江陶瓷史，半部在龙泉。龙泉青瓷传统烧制技艺始于三国两晋，兴于宋元，在南宋时期达到鼎盛，是与宋词、宋画等并列的“文化符号”，也是联合国教科文组织《人类非物质文化遗产代表作名录》中首个入选的陶瓷类项目。
-                </a>
-              </p>
+          <li>
+          <div class="col_01_left">
+            <div class="news">
+              <h3 v-for="item in seaList.slice(0, 1)" :key="item.id">
+                <router-link
+                  :to="{ path: 'detail', query: { id: item.pk } }"
+                  tag="a"
+                  target="_blank"
+                  >{{ item.fields.title }}</router-link
+                >
+              </h3>
             </div>
-          <!-- </li> -->
+            <p class="gray" v-for="item in seaList.slice(0, 1)" :key="item.id">
+              <router-link
+                class="ellipsis-2"
+                :to="{ path: 'detail', query: { id: item.pk } }"
+                tag="a"
+                target="_blank"
+                >{{ item.fields.content }}</router-link
+              >
+            </p>
+          </div>
+          </li>
           <!-- 右侧 -->
-          <!-- <li> -->
-            <div class="col_01_right">
-              <ul class="list">
-                <li>
-                  <a href="">无影灯：让中医代代薪火相传</a>
-                </li>
-                <li>
-                  <a href="">无影灯：让中医代代薪火相传</a>
-                </li>
-                <li>
-                  <a href="">无影灯：让中医代代薪火相传</a>
-                </li>
-                <li>
-                  <a href="">无影灯：让中医代代薪火相传</a>
-                </li>
-              </ul>
+          <li>
+          <div class="col_01_right">
+            <ul class="list">
+              <li
+                class="ellipsis"
+                v-for="item in seaList.slice(2, 6)"
+                :key="item.id"
+              >
+                <router-link
+                  :to="{ path: 'detail', query: { id: item.pk } }"
+                  tag="a"
+                  target="_blank"
+                  >{{ item.fields.title }}</router-link
+                >
+              </li>
+            </ul>
+          </div>
+          </li>
+          </ul>
+        </div>
+        <!-- 第二排 -->
+        <div class="rm_wt02 w">
+          <!-- 左侧 -->
+          <div class="col_02_left">
+            <ul class="list2">
+              <li
+                class="ellipsis"
+                v-for="item in seaList.slice(6, 10)"
+                :key="item.id"
+              >
+                <router-link
+                  :to="{ path: 'detail', query: { id: item.pk } }"
+                  tag="a"
+                  target="_blank"
+                  >{{ item.fields.title }}</router-link
+                >
+              </li>
+            </ul>
+          </div>
+          <!-- 右侧 -->
+          <div class="col_02_right">
+            <div class="news2">
+              <h3 v-for="item in seaList.slice(1, 2)" :key="item.id">
+                <router-link
+                  :to="{ path: 'detail', query: { id: item.pk } }"
+                  tag="a"
+                  target="_blank"
+                  >{{ item.fields.title }}</router-link
+                >
+              </h3>
             </div>
-          <!-- </li> -->
-        <!-- </ul> -->
+            <p class="gray2" v-for="item in seaList.slice(1, 2)" :key="item.id">
+              <router-link
+                class="ellipsis-2"
+                :to="{ path: 'detail', query: { id: item.pk } }"
+                tag="a"
+                target="_blank"
+                >{{ item.fields.content }}</router-link
+              >
+            </p>
+          </div>
+        </div>
       </div>
-      <!-- 第二排 -->
-      <div class="rm_wt02 w">
-          <!-- 左侧 -->        
-            <div class="col_02_left">
-              <ul class="list2">
-                <li>
-                  <a href="">保护环境人人有责</a>
-                </li>
-                <li>
-                  <a href="">保护环境人人有责</a>
-                </li>
-                <li>
-                  <a href="">保护环境人人有责</a>
-                </li>
-                <li>
-                  <a href="">保护环境人人有责</a>
-                </li>
-              </ul>
-            </div>
-          <!-- 右侧 -->            
-            <div class="col_02_right">
-              <div class="news2">
-                <h3>
-                  <a href="">探索宜宾新城环境污染问题</a>
-                </h3>
-              </div>
-              <p class="gray2">
-                <a href="">
-                  一部中国陶瓷史，半部在浙江；一部浙江陶瓷史，半部在龙泉。龙泉青瓷传统烧制技艺始于三国两晋，兴于宋元，在南宋时期达到鼎盛，是与宋词、宋画等并列的“文化符号”，也是联合国教科文组织《人类非物质文化遗产代表作名录》中首个入选的陶瓷类项目。
-                </a>
-              </p>
-            </div>
-      </div>
-      </div> 
-      <app-video/>
-      </MyPanel>
-    </div>
-  </template>
+      <app-video :list="seaList" />
+    </MyPanel>
+  </div>
+</template>
   
   <script>
-  import MyPanel from "@/components/MyPanel.vue";
-  import AppMore from '@/components/liarbry/AppMore.vue';
-
-  
-  export default {
-    components: { 
-      MyPanel,
-      AppMore
-
-   },
-  };
-  </script>
+import MyPanel from "@/components/MyPanel.vue";
+import AppMore from "@/components/liarbry/AppMore.vue";
+import { getSeaList } from "@/api/LayOut";
+import { ref } from "vue";
+import {useSeaStore} from '@/store/pinia/sea'
+import { storeToRefs } from 'pinia';
+export default {
+  components: {
+    MyPanel,
+    AppMore,
+  },
+  setup(props) {
+    const seaStoe = useSeaStore()
+    seaStoe.getAllSea()
+    const {seaList} = storeToRefs(seaStoe)
+    // const list=ref([]);
+    // getSeaList().then(res=>{
+    //   console.log(res);
+    //   if((res.status)){
+    //     list.value=res.sea;
+    //   }
+    // }).catch(err=>{
+    //   console.log(err);
+    // })
+    return { seaList };
+  },
+};
+</script>
   
   <style lang="less" scoped>
-  .sea{
-    overflow: hidden;
-    height: 800px;
-    background-color: #fff;
-  }
-  .severe{ 
+.sea {
+  margin: 20px 0;
+  overflow: hidden;
+  height: 840px;
+  background-color: #fff;
+}
+.severe {
   background-color: #fff;
   height: 420px;
 }
@@ -131,34 +166,31 @@
 }
 .news {
   padding: 20px;
-  a{
+  a {
     &:hover {
-    color: @xtxColor;
-  }
+      color: @xtxColor;
+    }
   }
 }
 .news2 {
   padding: 20px;
-  a{
+  a {
     &:hover {
-    color: @xtxColor;
-  }
+      color: @xtxColor;
+    }
   }
 }
 .gray {
   padding: 0 20px;
-  
 }
 .gray2 {
   padding: 0 20px;
-  
 }
 .col_01_right {
   width: 250px;
   height: 200px;
   padding-left: 30px;
   float: left;
-
 }
 .col_02_left {
   width: 250px;
@@ -173,13 +205,13 @@
     padding: 13px 20px;
     font-size: 15px;
     border-bottom: 1px solid rgb(236, 233, 233);
-    a{
-        &:hover {
-      color: @xtxColor;
-    }
+    a {
+      &:hover {
+        color: @xtxColor;
+      }
     }
   }
-  li:nth-child(4){
+  li:nth-child(4) {
     border-bottom: 0;
   }
 }
@@ -190,14 +222,14 @@
     padding: 13px 20px;
     font-size: 15px;
     border-bottom: 1px solid rgb(236, 233, 233);
-    a{
-        &:hover {
-      color: @xtxColor;
-    }
+    a {
+      &:hover {
+        color: @xtxColor;
+      }
     }
   }
-  li:nth-child(4){
+  li:nth-child(4) {
     border-bottom: 0;
   }
 }
-  </style>
+</style>

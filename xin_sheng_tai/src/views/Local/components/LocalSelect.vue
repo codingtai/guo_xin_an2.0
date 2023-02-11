@@ -1,15 +1,18 @@
 <template>
     <div>
-        <app-content/>
-        <app-content/>
+        <app-content :list="list"/>
+        
     </div>
 </template>
 
 <script>
-import AppContent from '../../../components/liarbry/AppContent.vue'
     export default {
-  components: { AppContent },
-        
+        props:{
+            list:{
+                type:Array,
+                default:[]
+            }
+        }
     }
 </script>
 

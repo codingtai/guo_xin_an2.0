@@ -30,10 +30,28 @@ input{
     margin: 0 auto;
 }
 
+
+
 .ellipsis{
     white-space: nowrap;
     text-overflow: ellipsis;
     overflow: hidden;
+}
+
+.ellipsis-3{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+}
+
+.ellipsis-6{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 6;
+    -webkit-box-orient: vertical;
 }
 
 .ellipsis-2{
@@ -41,7 +59,7 @@ input{
     text-overflow: ellipsis;
     display: -webkit-box;
     -webkit-box-orient: vertical;
-    -webkit-line-clamp: 2;
+    -webkit-line-clamp: 4;
     overflow: hidden;
 }
 

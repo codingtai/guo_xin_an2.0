@@ -1,11 +1,11 @@
-import { getCategoryList } from "@/api/index";
-import { topCategory } from "@/utils/constants";
+import { getCategoryList } from "@/api/LayOut";
+import {topCategory} from '@/utils/constants'
 
 export default{
     namespace:true,
     state:()=>{
         return{
-            cateList:topCategory,//默认值，如果请求不到数据时显示
+            cateList:[],//默认值，如果请求不到数据时显示
         }
     },
     mutations:{
@@ -19,8 +19,8 @@ export default{
             try{
                 const res=await getCategoryList();
                 console.log(res);
-                if(res.code==='200'){
-                    commit('setList',res.data.cateList)
+                if(res.status){
+                    commit('setList',res.category)
                 }
             }catch(error){
                 console.log(error);

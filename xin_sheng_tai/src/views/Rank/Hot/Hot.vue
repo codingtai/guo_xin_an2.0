@@ -1,6 +1,7 @@
 <template>
     <div>
-        <my-hot/>
+        <h3>待更新</h3>
+        <!-- <my-hot/> -->
     </div>
 </template>
 

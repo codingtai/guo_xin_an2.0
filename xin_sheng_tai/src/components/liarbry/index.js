@@ -5,6 +5,7 @@ import AppChannel from './AppChannel.vue'
 import AppCard from './AppCard.vue'
 import AppContent from './AppContent.vue'
 import AppContentTwo from './AppContentTwo.vue'
+import HeaderNav from './HeaderNav.vue'
 
 export default{
     install(app){
@@ -16,5 +17,6 @@ export default{
         app.component(AppCard.name,AppCard);
         app.component(AppContent.name,AppContent);
         app.component(AppContentTwo.name,AppContentTwo)
+        app.component(HeaderNav.name,HeaderNav)
     }
 }

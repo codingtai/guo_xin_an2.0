@@ -1,6 +1,7 @@
 <template>
     <div>
-        <my-good/>
+        <h3>待更新</h3>
+        <!-- <my-good/> -->
     </div>
 </template>
 

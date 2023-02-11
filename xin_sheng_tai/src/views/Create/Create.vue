@@ -76,7 +76,7 @@
           </el-menu>
         </el-aside>
         <el-main>
-          <div class="main">
+          <div class="main w">
             <router-view />
           </div>
         </el-main>

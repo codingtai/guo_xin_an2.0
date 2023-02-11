@@ -27,7 +27,7 @@
 </template>
 
 <script>
-import AppRank from '../../components/liarbry/AppRank.vue';
+import { useStore } from 'vuex';
 import HomeBanner from './components/HomeBanner.vue';
 import HomeLand from './components/HomeLand.vue';
 import HomeLocal from './components/HomeLocal.vue';
@@ -38,23 +38,30 @@ import HomeWater from './components/HomeWater.vue';
 
 
     export default {
-  components: { HomeSevere, HomeLocal, HomeLand, HomeSea, HomeWater, AppRank, HomeTop, HomeBanner},
-
+  components: { HomeSevere, HomeLocal, HomeLand, HomeSea, HomeWater, HomeTop, HomeBanner},
+        setup(){
+            // const store = useStore();
+            // store.dispatch('getAllLocal')
+            return {}
+        }
     };
 </script>
 
 <style lang="less" scoped>
 .home-top{
+    padding-bottom: 30px;
+    margin: 20px 0;
     overflow: hidden;
-    height: 520px;
+    // height: 520px;
 }
 .banner{
     float: left;
     margin-right: 8px;
 }
 .rank{
+    overflow: hidden;
     float: left;
     margin-left: 8px;
-    margin-top: 3px;
+    margin-top: 13px;
 }
 </style>

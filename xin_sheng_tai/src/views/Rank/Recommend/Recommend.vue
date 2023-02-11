@@ -1,6 +1,7 @@
 <template>
     <div>
-        <my-recommend/>
+        <h3>暂无信息</h3>
+        <!-- <my-recommend/> -->
     </div>
 </template>
 

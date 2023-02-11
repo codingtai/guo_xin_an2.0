@@ -5,9 +5,7 @@
 </template>
 
 <script>
-import AppChannel from '../../../components/liarbry/AppChannel.vue'
     export default {
-  components: { AppChannel },
         
     }
 </script>

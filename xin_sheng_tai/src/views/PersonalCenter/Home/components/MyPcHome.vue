@@ -1,14 +1,23 @@
 <template>
     <div>
-        <app-content/>
+        <app-content :list="userDetail" v-if="loginStatus"/>
+        <app-content v-else/>
     </div>
 </template>
 
 <script>
-import AppContent from '../../../../components/liarbry/AppContent.vue'
+import { useUserStore } from '@/store/pinia/user';
+import { storeToRefs } from 'pinia';
+
     export default {
-  components: { AppContent },
-        
+        setup(){
+            const userStore = useUserStore()
+            const {userDetail,loginStatus} = storeToRefs(userStore)
+            return{
+                userDetail,
+                loginStatus
+            }
+        }
     }
 </script>
 

@@ -4,17 +4,8 @@
       <li class="item">
             <router-link class="link" to="/">首页</router-link>
         </li>
-      <li v-for="item in list" :key="item.id">
-        <router-link :to="item.router">{{item.name}}</router-link>
-        <!-- 弹出层 -->
-        <!-- <div class="layer w">
-          <ul>
-            <li v-for="ele in list.CateGroupList" :key="ele.id">
-              <router-link :to="('/category/'+ele.id)">{{ele.name}}</router-link>   
-            </li>
-            
-          </ul>
-        </div> -->
+      <li v-for="item in list.slice(0,7)" :key="item.id">
+        <router-link :to="item.fields.router">{{item.fields.kind_name}}</router-link>
       </li>
       <li>
         <a href="###"><i class="iconfont icon-gengduo"></i></a>
@@ -30,31 +21,39 @@
 </template>
 
 <script>
-import { getCategoryList } from '@/api';
+
+import { getCategoryList } from '@/api/LayOut';
 import { ref } from 'vue';
-import { computed } from '@vue/runtime-core';
-import { useStore } from 'vuex';
 export default {
-  setup(props){
+  setup(){
+    // const store = useStore()
+    
+    // console.log(store);
+    // const list = computed(()=>{
+    //   return store.state.category.cateList
+    // })
+    // console.log(list);
+    // const store = CateListStore()
+    // const {cateList} = storeToRefs(store)
+    // const list =()=>{
+    //   store.getAllCategory()
+    // }
+    // return {
+      // cateList,
+    
+    // }
+
     const list=ref([]);
     getCategoryList().then(res=>{
       console.log(res);
-      if(res.code==='200'){
-        list.value=res.data[0].cateList;
+      if(res.status){
+        list.value=res.category
       }
     }).catch(err=>{
       console.log(err);
     })
     return {list}
   }
-  // setup(props){
-  //   const store = useStore();
-  //   const list = computed(()=>{
-  //     return store.state.category.cateList
-  //   });
-
-  //   return {list};
-  // }
 
 };
 </script>

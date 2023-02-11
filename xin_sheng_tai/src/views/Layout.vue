@@ -26,7 +26,8 @@ import AppFooter from '@/components/AppFooter.vue';
     AppFooter
     
 }
-}
+    }
+
 </script>
 
 <style lang="less" scoped>

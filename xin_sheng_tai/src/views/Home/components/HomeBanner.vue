@@ -2,35 +2,36 @@
     <div class="banner">
         <el-carousel height="500px" width="500px">
       <el-carousel-item v-for="item in list" :key="item.id">
-        <img :src="item.imgUrl" alt="">
+        <img :src="baseUrl+item.fields.banner_photo" alt="">
       </el-carousel-item>
     </el-carousel>
     </div>
 </template>
 
 <script>
-import { getBanner } from '@/api';
+import { getBanner } from '@/api/LayOut';
 import { ref } from 'vue';
     export default {
         setup(props){
           const list=ref([]);
+          const baseUrl='http://localhost:3300/web/media/'
           getBanner().then(res=>{
             console.log(res);
-            if((res.msg='操作成功')){
-              list.value=res.result;
+            if((res.status)){
+              list.value=res.banner;
             }
           }).catch(err=>{
             console.log(err);
           })
 
-          return {list}
+          return {list,baseUrl}
         }
     }
 </script>
 
 <style lang="less" scoped>
 .banner{
-    margin-top: 5px;
+    margin-top: 25px;
     width: 750px;
     img{
       width: 750px;

@@ -1,8 +1,8 @@
 <template>
     <div class="fans w">
         <MyPanel class="panel" title="我的粉丝" subTitle=""></MyPanel>
-        <my-fans/>
-        <my-fans/>
+        <!-- <my-fans/>
+        <my-fans/> -->
     </div>
 </template>
 

@@ -1,12 +1,12 @@
 <template>
      <div>
         <!-- 分类列表 -->
-       <radiate-channel/>
+       <!-- <radiate-channel/> -->
 
         <!-- 轮播图 -->
-        <radiate-card/>
+        <!-- <radiate-card/> -->
 
-        <MyPanel title="精选话题" subTitle=""></MyPanel>
+        <MyPanel title="有待更新" subTitle=""></MyPanel>
         <!-- 主体内容 -->
        <radiate-select/>
        

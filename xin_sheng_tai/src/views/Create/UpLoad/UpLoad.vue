@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div >
         <my-up-load/>
     </div>
 </template>

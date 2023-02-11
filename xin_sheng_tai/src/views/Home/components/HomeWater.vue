@@ -1,88 +1,108 @@
 <template>
-    <div class="water">
-      <MyPanel title="水污染" subTitle="保护水资源保护人身安全">
-        <!-- 使用右侧插槽 -->
-        <template #right>
-          <app-more/>          
-        </template>
-        <!-- 第一排 -->
-        <div class="row01">
-          <div class="right-01">
-            <a href="#">
-              <img src="@/assets/logo.png" alt="" />
-            </a>
-            <a href="#">
-              <span>长江上游最大的环境问题</span>
-            </a>
-          </div>
-          <div class="right-02">
-            <a href="#">
-              <img src="@/assets/logo.png" alt="" />
-            </a>
-            <a href="#">
-              <span>长江上游最大的环境问题</span>
-            </a>
-          </div>
-          <div class="right-03">
-            <a href="#">
-              <img src="@/assets/logo.png" alt="" />
-            </a>
-            <a href="#">
-              <span>长江上游最大的环境问题</span>
-            </a>
-          </div>
+  <div class="water">
+    <MyPanel title="水污染" subTitle="保护水资源保护人身安全">
+      <!-- 使用右侧插槽 -->
+      <template #right>
+        <app-more />
+      </template>
+      <!-- 第一排 -->
+      <div class="row01" v-for="item in waterList.slice(0, 3)" :key="item.id">
+        <div class="right-01">
+          <router-link
+            :to="{ path: 'detail', query: { id: item.pk } }"
+            tag="a"
+            target="_blank"
+            ><img :src="baseUrl + item.fields.photo"
+          /></router-link>
+          <router-link
+            :to="{ path: 'detail', query: { id: item.pk } }"
+            tag="a"
+            target="_blank"
+            ><span>{{ item.fields.title }}</span></router-link
+          >
         </div>
-        <!-- 第二排 -->
-        <div class="row02">
-          <div class="left-01">
-            <a href="#"><img src="@/assets/logo.png" alt="" /></a>
+      </div>
+      <!-- 第二排 -->
+      <div class="row02">
+        <div class="left-01" v-for="item in waterList.slice(3, 5)" :key="item.id">
+          <div class="imge">
+            <router-link
+              :to="{ path: 'detail', query: { id: item.pk } }"
+              tag="a"
+              target="_blank"
+              ><img :src="baseUrl + item.fields.photo"
+            /></router-link>
+          </div>
+          <div class="content">
             <div class="news">
               <h3>
-                <a href="">探索宜宾新城环境污染问题</a>
+                <router-link
+                  :to="{ path: 'detail', query: { id: item.pk } }"
+                  tag="a"
+                  target="_blank"
+                  >{{ item.fields.title }}</router-link
+                >
               </h3>
             </div>
-            <p class="gray">
-              <a href="">
-                一部中国陶瓷史，半部在浙江；一部浙江陶瓷史，半部在龙泉。龙泉青瓷传统烧制技艺始于三国两晋，兴于宋元，在南宋时期达到鼎盛，是与宋词、宋画等并列的“文化符号”，也是联合国教科文组织《人类非物质文化遗产代表作名录》中首个入选的陶瓷类项目。
-              </a>
-            </p>
-          </div>
-          <div class="left-02">
-            <a href="#"><img src="@/assets/logo.png" alt="" /></a>
-            <div class="news">
-              <h3>
-                <a href="">探索宜宾新城环境污染问题</a>
-              </h3>
+            <div class="gray">
+              <p>
+                <router-link
+                  class="ellipsis-2"
+                  :to="{ path: 'detail', query: { id: item.pk } }"
+                  tag="a"
+                  target="_blank"
+                  >{{ item.fields.content }}</router-link
+                >
+              </p>
             </div>
-            <p class="gray">
-              <a href="">
-                一部中国陶瓷史，半部在浙江；一部浙江陶瓷史，半部在龙泉。龙泉青瓷传统烧制技艺始于三国两晋，兴于宋元，在南宋时期达到鼎盛，是与宋词、宋画等并列的“文化符号”，也是联合国教科文组织《人类非物质文化遗产代表作名录》中首个入选的陶瓷类项目。
-              </a>
-            </p>
           </div>
         </div>
-      </MyPanel>
-    </div>
-  </template>
+      </div>
+    </MyPanel>
+  </div>
+</template>
   
   <script>
-  import MyPanel from "@/components/MyPanel.vue";
-  import AppMore from '@/components/liarbry/AppMore.vue';
-  
-  export default {
-    components: { 
-      MyPanel,
-      AppMore
-   },
-  };
-  </script>
+import MyPanel from "@/components/MyPanel.vue";
+import AppMore from "@/components/liarbry/AppMore.vue";
+import { getWaterList } from "@/api/LayOut";
+import { ref } from "vue";
+import { useWaterStore } from "@/store/pinia/water";
+import { storeToRefs } from 'pinia';
+export default {
+  components: {
+    MyPanel,
+    AppMore,
+  },
+  setup(props) {
+    const baseUrl = "http://localhost:3300/web/media/";
+    const waterStore = useWaterStore()
+    const {waterList} = storeToRefs(waterStore)
+    waterStore.getAllWater()
+    // const list = ref([]);
+    // getWaterList()
+    //   .then((res) => {
+    //     console.log(res);
+    //     if (res.status) {
+    //       list.value = res.water;
+    //     }
+    //   })
+    //   .catch((err) => {
+    //     console.log(err);
+    //   });
+    return { waterList, baseUrl };
+  },
+};
+</script>
   
   <style lang="less" scoped>
-  .water{
-    height: 600px;
-  }
-  .right-01 {
-  height: 240px;
+.water {
+  height: 700px;
+  margin-bottom: 20px;
+}
+
+.right-01 {
+  height: 300px;
   width: 300px;
   margin-left: 50px;
   float: left;
@@ -93,94 +113,45 @@
     .hoverLarge();
   }
   span {
+    margin-top: 20px;
     height: 40px;
     display: block;
     text-align: center;
-    &:hover{
+    &:hover {
       color: @xtxColor;
     }
   }
 }
-.right-02 {
-  height: 240px;
-  width: 300px;
-  margin-left: 50px;
+
+.imge {
   float: left;
-  overflow: hidden;
+  height: 240px;
+  width: 200px;
   img {
-    height: 200px;
-    width: 300px;
-    .hoverLarge();
-  }
-  span {
-    height: 40px;
-    display: block;
-    text-align: center;
-    &:hover{
-      color: @xtxColor;
-    }
+    height: 240px;
+    width: 200px;
+    .hoverShadow();
   }
 }
-.right-03 {
-  height: 240px;
-  width: 300px;
-  margin-left: 50px;
-  float: left;
-  overflow: hidden;
-  img {
-    height: 200px;
-    width: 300px;
-    .hoverLarge();
-  }
-  span {
-    height: 40px;
-    display: block;
-    text-align: center;
-    &:hover{
-      color: @xtxColor;
-    }
-  }
+.content {
+  display: inline;
 }
 .left-01 {
-  background-color: rgb(241, 239, 239);
   float: left;
   height: 240px;
-  width: 530px;
-  overflow: hidden;
-  img {
-    float: left;
-    height: 240px;
-    width: 200px;
-    .hoverShadow()
-  }
-}
-.left-02 {
+  width: 500px;
+  margin: 20px 20px;
   background-color: rgb(241, 239, 239);
-  float: right;
-  height: 240px;
-  width: 530px;
-  overflow: hidden;
-  img {
-    float: left;
-    height: 240px;
-    width: 200px;
-    .hoverShadow()
-  }
 }
 .news {
-  float: left;
-  margin: 30px 40px;
-  a{
-    &:hover{
+  margin: 20px 20px 20px 220px;
+  a {
+    &:hover {
       color: @xtxColor;
     }
   }
 }
 .gray {
-  margin-top: 90px;
-  padding: 0 20px;
-  a{
-    margin-left: 20px;
-  }
+  margin: 30px 20px 20px 220px;
 }
-  </style>
+</style>

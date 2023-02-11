@@ -13,33 +13,42 @@
         <!-- 热搜内容 -->
         <div class="content">
             <ul>
-                <li><span>1</span><a href="">宜宾市......</a></li>
-                <li><span>2</span><a href="">宜宾市......</a></li>
-                <li><span>3</span><a href="">宜宾市......</a></li>
-                <li><span>4</span><a href="">宜宾市......</a></li>
-                <li><span>5</span><a href="">宜宾市......</a></li>
-                <li><span>6</span><a href="">宜宾市......</a></li>
-                <li><span>7</span><a href="">宜宾市......</a></li>
-                <li><span>8</span><a href="">宜宾市......</a></li>
+                <li class="ellipsis" v-for="item in list.slice(0,8)" :key="item.id">
+                    <span>{{item.pk}}</span>
+                    <router-link :to="{path:'detail' , query:{id:item.pk}}" tag="a" target="_blank">{{item.fields.title}}</router-link>
+                </li>
             </ul>
         </div>
         <!-- 热搜底 -->
         <div class="rank-bottom">
-            <a href="">
-                    <span>查看完整热榜消息</span>
-            </a>
+            <router-link to="/rank"><span>查看完整热榜消息</span></router-link>
         </div>
     </div>
 </template>
 
 <script>
+import { getRank } from '@/api/LayOut';
+import { ref } from 'vue';
     export default {
-        name:'AppRank'
+        name:'AppRank',
+        setup(props){
+          const list=ref([]);
+          getRank().then(res=>{
+            console.log(res);
+            if((res.status)){
+              list.value=res.rank;
+            }
+          }).catch(err=>{
+            console.log(err);
+          })
+          return {list}
+        }
     }
 </script>
 
 <style lang="less" scoped>
 .rank{
+    overflow: hidden;
     background-color: #fff;
     width: 280px;
     float: right;
@@ -67,6 +76,7 @@
         li{
             padding: 13px 0;
             border-bottom: 1px solid rgb(233, 231, 231);
+            
             span{
                 font-size: 17px;
                 padding-right: 7px;

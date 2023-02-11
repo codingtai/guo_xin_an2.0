@@ -5,9 +5,7 @@
 </template>
 
 <script>
-import AppContent from '../../../../components/liarbry/AppContent.vue'
     export default {
-  components: { AppContent },
         
     }
 </script>

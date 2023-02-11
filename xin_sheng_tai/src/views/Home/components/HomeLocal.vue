@@ -5,88 +5,98 @@
       <template #right>
         <app-more />
       </template>
-      <div class="local">
-        <!-- 第一排 -->
-        <div class="row01">
-          <!-- 左半部分 -->
-          <div class="left-01">
-            <a href="#"><img src="@/assets/logo.png" alt="" /></a>
+    </MyPanel>
+    <div class="local">
+      <!-- 第一排 -->
+      <div class="row01">
+        <!-- 左半部分 -->
+        <div class="left-01" v-for="item in localList.slice(0, 1)" :key="item.id">
+          <div class="image">
+            <router-link :to="{ path: 'detail' , query:{id:item.pk}}" tag="a" target="_blank"
+              ><img :src="baseUrl + item.fields.photo"
+            /></router-link>
+          </div>
+          <div class="content">
             <div class="news">
-              <h3>
-                <a href="">探索宜宾新城环境污染问题</a>
+              <h3 v-for="item in localList.slice(0, 1)" :key="item.id">
+                <router-link :to="{ path: 'detail' , query:{id:item.pk}}" tag="a" target="_blank">{{
+                  item.fields.title
+                }}</router-link>
               </h3>
             </div>
-            <p class="gray">
-              <a href="">
-                一部中国陶瓷史，半部在浙江；一部浙江陶瓷史，半部在龙泉。龙泉青瓷传统烧制技艺始于三国两晋，兴于宋元，在南宋时期达到鼎盛，是与宋词、宋画等并列的“文化符号”，也是联合国教科文组织《人类非物质文化遗产代表作名录》中首个入选的陶瓷类项目。
-              </a>
-            </p>
-          </div>
-          <!-- 右半部分 -->
-          <div class="right-01">
-            <a href="#">
-              <img src="@/assets/logo.png" alt="" />
-            </a>
-            <a href="#">
-              <span>长江上游最大的环境问题</span>
-            </a>
+            <div class="graybox">
+              <p v-for="item in localList.slice(0, 1)" :key="item.id">
+                <router-link
+                  class="ellipsis-6"
+                  :to="{ path: 'detail' , query:{id:item.pk}}"
+                  tag="a"
+                  target="_blank"
+                  >{{ item.fields.content }}</router-link
+                >
+              </p>
+            </div>
           </div>
         </div>
-        <!-- 第二排 -->
-        <div class="row02 w">
-          <div class="video">
-            <h3><a href="#">视频资源</a></h3>
-          </div>
-        </div>
-        <!-- 第三排 -->
-         <div class="real-video">
-          <ul>
-            <li>
-              <a href="">
-                <img src="@/assets/logo.png" alt="" />
-                <span>宜宾酒厂无酒排放</span>
-              </a>
-            </li>
-            <li>
-              <a href="">
-                <img src="@/assets/logo.png" alt="" />
-                <span>宜宾酒厂无酒排放</span>
-              </a>
-            </li>
-            <li>
-              <a href="">
-                <img src="@/assets/logo.png" alt="" />
-                <span>宜宾酒厂无酒排放</span>
-              </a>
-            </li>
-          </ul>
+        <!-- 右半部分 -->
+        <div class="right-01" v-for="item in localList.slice(1, 2)" :key="item.id">
+          <router-link :to="{ path: 'detail' , query:{id:item.pk}}" tag="a" target="_blank"
+            ><img :src="baseUrl + item.fields.photo"
+          /></router-link>
+          <router-link :to="{ path: 'detail' , query:{id:item.pk}}" tag="a" target="_blank"
+            ><span>{{ item.fields.title }}</span></router-link
+          >
         </div>
       </div>
-    </MyPanel>
+    </div>
+    <div>
+      <app-video :list="localList"/>
+    </div>
   </div>
 </template>
 
 <script>
+import {useLocalStore} from '@/store/pinia/local'
 import MyPanel from "@/components/MyPanel.vue";
-import AppMore from "@/components/liarbry/AppMore.vue";
-
+import { computed, ref } from "vue";
+import { useStore } from 'vuex';
+import { storeToRefs } from 'pinia';
 export default {
   components: {
     MyPanel,
-    AppMore,
-    
+  },
+  setup(props, context) {
+    const localStore = useLocalStore()
+    localStore.getAllLocal()
+    const {localList} = storeToRefs(localStore)
+    // const store = useStore()
+    // store.dispatch('getAllLocal')
+    // const list = computed(()=>{
+    //   return store.state.local.localList
+    // })
 
+    const baseUrl = "http://localhost:3300/web/media/";
+    // getLocalList()
+    //   .then((res) => {
+    //     console.log(res);
+    //     if (res.status) {
+    //       list.value = res.local;
+    //     }
+    //   })
+    //   .catch((err) => {
+    //     console.log(err);
+    //   });
+    return {  baseUrl,localList };
   },
 };
 </script>
 
 <style lang="less" scoped>
 .home-local {
-  height: 650px;
   overflow: hidden;
 }
 .local {
-  height: 300px;
+  height: 250px;
+  margin: 20px 0;
 }
 .left-01 {
   background-color: rgb(241, 239, 239);
@@ -94,29 +104,33 @@ export default {
   height: 240px;
   width: 700px;
   overflow: hidden;
+}
+.image {
+  float: left;
+  height: 240px;
+  width: 200px;
   img {
-    float: left;
     height: 240px;
     width: 200px;
-    .hoverShadow()
+    .hoverShadow();
   }
 }
+.content {
+  display: inline;
+}
 .news {
-  float: left;
-  margin: 30px 40px;
-  a{
-    &:hover{
+  margin: 20px 20px 20px 220px;
+  a {
+    &:hover {
       color: @xtxColor;
     }
   }
 }
-.gray {
-  margin-top: 90px;
-  padding: 0 20px;
-  a{
-    margin-left: 20px;
-  }
+.graybox {
+  margin: 30px 20px 20px 220px;
+  line-height: 22px;
 }
+
 .right-01 {
   height: 240px;
   width: 300px;
@@ -125,61 +139,16 @@ export default {
   img {
     height: 200px;
     width: 300px;
-    .hoverShadow()
+    .hoverShadow();
   }
   span {
+    padding: 2px 15px;
     height: 40px;
     display: block;
     text-align: center;
-    &:hover{
+    &:hover {
       color: @xtxColor;
     }
   }
 }
-.row01{
-  height: 249px;
-}
-.row02{
-  height: 45px;
-  
-}
-.video{
-  float: left;
-  margin-top: 10px;
-  a{
-    &:hover{
-      color: @xtxColor;
-    }
-  }
-}
-.real-video{
-  height: 260px;
-  ul{
-    li{
-      float: left;
-      height: 240px;
-      width: 300px;
-      margin-right: 50px;
-      float: left;
-      img {
-        height: 200px;
-        width: 300px;
-        .hoverShadow()
-      }
-      span {
-        margin-top: 10px;
-        height: 20px;
-        display: block;
-        text-align: center;
-        &:hover{
-          color: @xtxColor;
-        }
-      }
-    }
-    li:nth-child(3){
-      margin-right: 0;
-    }
-  }
-}
-
 </style>

@@ -1,25 +1,31 @@
 //顶级分类
-export const topCategory = [{
-    
-},{
-    "id":"2",
-    "name":"热榜"
-},{
-    "id":"3",
-    "name":"地方"
-},{
-    "id":"4",
-    "name":"陆地"
-},{
-    "id":"5",
-    "name":"海洋"
-},{
-    "id":"6",
-    "name":"空气"
-},{
-    "id":"7",
-    "name":"水"
-},{
-    "id":"8",
-    "name":"放射"
-}]
+export const topCategory = [
+    {
+        "id":"2",
+        "name":"热榜",
+        "router":"/rank"
+    },{
+        "id":"3",
+        "name":"地方",
+        "router":"/local"
+    },{
+        "id":"4",
+        "name":"陆地",
+        "router":"/land"
+    },{
+        "id":"5",
+        "name":"海洋",
+        "router":"/sea"
+    },{
+        "id":"6",
+        "name":"空气",
+        "router":"/air"
+    },{
+        "id":"7",
+        "name":"水",
+        "router":"/water"
+    },{
+        "id":"8",
+        "name":"放射",
+        "router":"/radiate"
+    }]
